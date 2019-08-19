@@ -9,7 +9,7 @@ const Child = () => {
   return(
     <>
     <p>Child {moment(Date.now()).format('DD.MM.YYYY')}</p>
-    <img src="sortsa.jpg" alt="Sortsa" className={"soran-parta"}/>
+    <img src="./sortsa.jpg" alt="Sortsa" className={"soran-parta"}/>
     </>
   )
 }

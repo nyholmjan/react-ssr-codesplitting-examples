@@ -24,9 +24,14 @@ const serverRenderer = (req, res, next) => {
 }
 router.use('^/$', serverRenderer)
 
-// Serve static files from the React app
+// Serve static files from the lazy React app
 router.use(
   express.static(path.resolve(__dirname, 'build'), { maxAge: '30d' })
+)
+
+// Serve static files for the not so lazy React app
+router.use('/notlazy',
+  express.static(path.resolve(__dirname, 'notlazyapp/build'), { maxAge: '30d' })
 )
 
 // tell the app to use the above rules
