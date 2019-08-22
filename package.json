@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "yarn && yarn run build && cd lazyapp && yarn && yarn build && cd ../notserversiderendered && yarn && yarn build"
+    "heroku-postbuild": "yarn && yarn build && cd ./lazyapp && yarn && yarn build && cd ../notserversiderendered && yarn && yarn build"
   },
   "eslintConfig": {
     "extends": "react-app"
