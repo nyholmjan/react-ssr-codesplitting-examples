@@ -67,7 +67,7 @@ router.use(
 
 router.use(
   '/lazyapp',
-  express.static(path.resolve(__dirname, 'lazyapp/build'), { maxAge: '30d' })
+  express.static(path.resolve(__dirname, 'lazy/build'), { maxAge: '30d' })
 )
 
 router.use(
