@@ -1,5 +1,5 @@
 {
-  "name": "lazyapp",
+  "name": "serversiderenderedapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,11 +7,13 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.5.5",
     "@material-ui/core": "^4.3.2",
+    "@material-ui/styles": "^4.3.0",
     "express": "^4.17.1",
     "ignore-styles": "^5.0.1",
     "moment": "^2.24.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1"
   },
   "scripts": {
@@ -20,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "yarn && yarn run build && cd notlazyapp && yarn && yarn build"
+    "heroku-postbuild": "yarn && yarn run build && cd lazyapp && yarn && yarn build && cd ../notserversiderendered && yarn && yarn build"
   },
   "eslintConfig": {
     "extends": "react-app"

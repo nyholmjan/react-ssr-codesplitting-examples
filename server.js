@@ -1,10 +1,32 @@
 import express from 'express'
 import App from './src/App'
-import path from 'path';
-import fs from 'fs';
+import path from 'path'
+import fs from 'fs'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-const app = express();
+import { StaticRouter as Router } from 'react-router-dom'
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
+import { createMuiTheme } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
+
+// Create a theme instance.
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#556cd6',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+    error: {
+      main: red.A400,
+    },
+    background: {
+      default: '#fff',
+    },
+  },
+})
+const app = express()
 
 const router = express.Router()
 
@@ -14,30 +36,49 @@ const serverRenderer = (req, res, next) => {
       console.error(err)
       return res.status(500).send('An error occurred')
     }
-    return res.send(
-      data.replace(
-        '<div id="root"></div>',
-        `<div id="root">${ReactDOMServer.renderToString(<App />)}</div>`
+    const sheets = new ServerStyleSheets()
+    const context = {}
+    const rendered = ReactDOMServer.renderToString(
+      sheets.collect(
+        <ThemeProvider theme={theme}>
+          <Router location={req.url} context={context}>
+            <App />
+          </Router>
+        </ThemeProvider>
       )
+    )
+    const renderedData = data.replace(
+      '<div id="root"></div>',
+      `<div id="root">${rendered}</div>`
+    ).replace(
+      '<style id="jss-server-side"></style>',
+      `<style id="jss-server-side">${sheets.toString()}</style>`
+    )
+    return res.send(
+      renderedData
     )
   })
 }
-router.use('^/$', serverRenderer)
 
-// Serve static files from the lazy React app
+router.use(
+  '/notserversiderendered',
+  express.static(path.resolve(__dirname, 'notserversiderendered/build'), { maxAge: '30d' })
+)
+
+router.use(
+  '/lazyapp',
+  express.static(path.resolve(__dirname, 'lazyapp/build'), { maxAge: '30d' })
+)
+
 router.use(
   express.static(path.resolve(__dirname, 'build'), { maxAge: '30d' })
 )
 
-// Serve static files for the not so lazy React app
-router.use('/notlazy',
-  express.static(path.resolve(__dirname, 'notlazyapp/build'), { maxAge: '30d' })
-)
+app.get(['/', '/story', '/sortsa'], serverRenderer)
 
-// tell the app to use the above rules
 app.use(router)
 
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Sora listening on ${port}`);
+console.log(`SSR listening on ${port}`);

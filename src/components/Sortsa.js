@@ -2,16 +2,16 @@ import React from 'react'
 import moment from 'moment'
 import * as materialUi from '@material-ui/core'
 
-import "./Child.css"
+import "./Sortsa.css"
 
-const Child = () => {
+const Sortsa = () => {
   const Button = materialUi.Button
   return(
     <>
-    <p>Child {moment(Date.now()).format('DD.MM.YYYY')}</p>
+    <p>{moment(Date.now()).format('DD.MM.YYYY')}</p>
     <img src="sortsa.jpg" alt="Sortsa" className={"soran-parta"}/>
     </>
   )
 }
 
-export default Child
+export default Sortsa
