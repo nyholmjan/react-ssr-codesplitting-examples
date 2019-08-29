@@ -20,6 +20,7 @@
     "start": "node index.js",
     "serve": "react-scripts start",
     "build": "react-scripts build",
+    "prepare-all": "yarn && react-scripts build && cd lazy && yarn && yarn build && cd ../notserversiderendered && yarn && yarn build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-postbuild": "yarn && yarn build && cd ./lazy && yarn && yarn build && cd ../notserversiderendered && yarn && yarn build"
