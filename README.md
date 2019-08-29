@@ -1,3 +1,27 @@
+Working examples of server side rendering and code splittin with React
+
+## Running the application
+
+#### Install dependencies and build production bundles:
+ `yarn prepare-all` or manually run `npm install` and `npm run build` in `/`, `/lazy` and `/serversiderendered`
+
+#### Serve the application:
+`yarn start` or `npm start`
+
+The applications will be served on:
+
+ [http://localhost:5000](http://localhost:5000) for the server side rendered version
+ 
+ [http://localhost:5000](http://localhost:5000/lazyapp) for the version with code splittin
+ 
+ [http://localhost:5000](http://localhost:5000/notserversiderendered) for the server conventional version
+
+The source code is in the:<br>
+/src folder for the server side rendered version<br>
+/lazy for the version wih code splitting<br>
+/notserversiderendered for the conventional version
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
